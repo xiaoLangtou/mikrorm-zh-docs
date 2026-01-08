@@ -20,24 +20,13 @@ Build professional documentation with Nuxt UI's powerful components, enhanced ty
 #links
   :::u-button
   ---
-  to: /getting-started
+  to: /guide/introduction
   size: xl
   trailing-icon: i-lucide-arrow-right
   ---
   Get started
   :::
 
-  :::u-button
-  ---
-  icon: i-simple-icons-github
-  color: neutral
-  variant: outline
-  size: xl
-  to: https://github.com/nuxt-ui-templates/docs
-  target: _blank
-  ---
-  Use this template
-  :::
 
 #default
   :::prose-pre

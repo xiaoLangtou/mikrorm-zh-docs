@@ -49,3 +49,11 @@ provide('navigation', navigation)
     </ClientOnly>
   </UApp>
 </template>
+
+<style>
+  em{
+    font-style: normal;
+    font-weight: bold;
+    color: #546E7A;
+  }
+</style>
