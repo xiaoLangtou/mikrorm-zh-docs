@@ -1,7 +1,7 @@
 ---
 seo:
-  title: Nuxt Docs Template
-  description: Create stunning, fast and SEO-optimized documentation sites with Nuxt UI.
+  title: MikroORM 中文文档
+  description: 基于 Data Mapper、Unit of Work 和 Identity Map 模式的 TypeScript ORM，支持 MongoDB、MySQL、PostgreSQL 等。
 ---
 
 ::u-page-hero{class="dark:bg-gradient-to-b from-neutral-900 to-neutral-950"}
@@ -12,92 +12,119 @@ orientation: horizontal
 :hero-background
 
 #title
-Ship Beautiful [Documentation]{.text-primary}.
+[MikroORM]{.text-primary}
+TypeScript ORM
 
 #description
-Build professional documentation with Nuxt UI's powerful components, enhanced typography, and seamless Nuxt Content integration. The same system trusted by the entire [Nuxt ecosystem](https://nuxt.com).
+基于 Data Mapper、Unit of Work 和 Identity Map 模式的 Node.js ORM。
+支持 MongoDB、MySQL、MariaDB、PostgreSQL、SQLite 和 Better-SQLite。
 
 #links
   :::u-button
   ---
-  to: /guide/introduction
+  to: /quick-start
   size: xl
   trailing-icon: i-lucide-arrow-right
   ---
-  Get started
+  快速开始
   :::
-
+  :::u-button
+  ---
+  to: https://github.com/mikro-orm/mikro-orm
+  target: _blank
+  size: xl
+  variant: subtle
+  icon: i-simple-icons-github
+  ---
+  GitHub
+  :::
 
 #default
   :::prose-pre
   ---
   code: |
-    export default defineNuxtConfig({
-      modules: [
-        '@nuxt/ui',
-        '@nuxt/content',
-        'nuxt-og-image',
-        'nuxt-llms'
-      ],
+    @Entity()
+    export class User {
+      @PrimaryKey()
+      id!: number;
 
-      css: ['~/assets/css/main.css']
-    })
-  filename: nuxt.config.ts
+      @Property()
+      name!: string;
+
+      @Property({ unique: true })
+      email!: string;
+
+      @OneToMany(() => Book, book => book.author)
+      books = new Collection<Book>(this);
+
+      constructor(name: string, email: string) {
+        this.name = name;
+        this.email = email;
+      }
+    }
+  filename: user.entity.ts
   ---
+  
+  ```ts [user.entity.ts]
+  @Entity()
+  export class User {
+    @PrimaryKey()
+    id!: number;
 
-  ```ts [nuxt.config.ts]
-  export default defineNuxtConfig({
-    modules: [
-      '@nuxt/ui',
-      '@nuxt/content',
-      'nuxt-og-image',
-      'nuxt-llms'
-    ],
+    @Property()
+    name!: string;
 
-    css: ['~/assets/css/main.css']
-  })
+    @Property({ unique: true })
+    email!: string;
+
+    @OneToMany(() => Book, book => book.author)
+    books = new Collection<Book>(this);
+
+    constructor(name: string, email: string) {
+      this.name = name;
+      this.email = email;
+    }
+  }
   ```
   :::
 ::
 
 ::u-page-section{class="dark:bg-neutral-950"}
 #title
-Powered by Nuxt UI components
-
-#links
-  :::u-button
-  ---
-  color: neutral
-  size: lg
-  target: _blank
-  to: https://ui.nuxt.com/docs/getting-started/installation/nuxt
-  trailingIcon: i-lucide-arrow-right
-  variant: subtle
-  ---
-  Explore Nuxt UI
-  :::
+核心特性
 
 #features
   :::u-page-feature
   ---
-  icon: i-lucide-palette
+  icon: i-lucide-database
   ---
   #title
-  100+ UI Components
-
+  多数据库支持
+  
   #description
-  Access the complete Nuxt UI component library. From badges to modals, everything styled and accessible out of the box.
+  支持 MongoDB、MySQL、MariaDB、PostgreSQL、SQLite 等多种数据库，并在 API 层面保持统一。
   :::
 
   :::u-page-feature
   ---
-  icon: i-lucide-type
+  icon: i-lucide-shield-check
   ---
   #title
-  Beautiful Typography
-
+  类型安全
+  
   #description
-  Pre-styled prose components with perfect visual harmony. No need for @tailwindcss/typography - get precise control over every element.
+  完全使用 TypeScript 编写，提供一流的类型推断和智能提示体验，让开发更自信。
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-box
+  ---
+  #title
+  Identity Map
+  
+  #description
+  自动跟踪已加载的实体，确保在同一个上下文中多次获取同一记录时返回相同的对象实例。
   :::
 
   :::u-page-feature
@@ -105,117 +132,10 @@ Powered by Nuxt UI components
   icon: i-lucide-layers
   ---
   #title
-  Rich Prose Components
-
+  Unit of Work
+  
   #description
-  Accordions, cards, callouts, tabs, steps, code blocks, and more - all provided by Nuxt UI for interactive documentation.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-search
-  ---
-  #title
-  Built-in Search
-
-  #description
-  Full-text search with ContentSearch component. No need for Algolia - instant, relevant results with keyboard shortcuts (⌘K).
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-navigation
-  ---
-  #title
-  Smart Navigation
-
-  #description
-  Auto-generated navigation with ContentNavigation and ContentToc components. Sticky table of contents and prev/next links.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-moon
-  ---
-  #title
-  Dark Mode Ready
-
-  #description
-  Automatic theme switching with smooth transitions. Respects system preferences and remembers user choice.
-  :::
-::
-
-::u-page-section{class="dark:bg-neutral-950"}
-#title
-Enhanced with Nuxt Content
-
-#links
-  :::u-button
-  ---
-  color: neutral
-  size: lg
-  target: _blank
-  to: https://content.nuxt.com/docs/getting-started/installation
-  trailingIcon: i-lucide-arrow-right
-  variant: subtle
-  ---
-  Explore Nuxt Content
-  :::
-
-#features
-  :::u-page-feature
-  ---
-  icon: i-simple-icons-markdown
-  ---
-  #title
-  MDC Enhanced Markdown
-
-  #description
-  Write in Markdown while embedding Vue components. Seamlessly integrate interactive elements in your content.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-file-text
-  ---
-  #title
-  File-based Routing
-
-  #description
-  Organize content in folders and files. Your documentation structure automatically becomes your navigation.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-code
-  ---
-  #title
-  Syntax Highlighting
-
-  #description
-  Beautiful code blocks with language detection, line numbers, and copy buttons. Support for 100+ languages.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-database
-  ---
-  #title
-  Content Database
-
-  #description
-  Query your content with a MongoDB-like API. Filter, sort, and search through your documentation programmatically.
-  :::
-
-  :::u-page-feature
-  ---
-  icon: i-lucide-file-code
-  ---
-  #title
-  Frontmatter Support
-
-  #description
-  Add metadata to your content files. Define SEO tags, navigation properties, and custom fields.
+  自动处理事务，并在 flush 时将所有更改批量写入数据库，极大提高写入性能。
   :::
 
   :::u-page-feature
@@ -223,10 +143,21 @@ Enhanced with Nuxt Content
   icon: i-lucide-git-branch
   ---
   #title
-  Version Control
-
+  Schema 迁移
+  
   #description
-  Content lives in your repository. Branch, review, and deploy documentation alongside your code.
+  内置强大的迁移工具，支持根据实体定义差异自动生成 SQL 迁移脚本，轻松管理数据库变更。
+  :::
+
+  :::u-page-feature
+  ---
+  icon: i-lucide-search
+  ---
+  #title
+  Query Builder
+  
+  #description
+  提供类型安全的 QueryBuilder，支持构建复杂的 SQL 查询（包括关联查询），同时保持代码的可维护性。
   :::
 ::
 
@@ -234,19 +165,19 @@ Enhanced with Nuxt Content
   :::u-page-c-t-a
   ---
   links:
-    - label: Start building
-      to: '/getting-started'
+    - label: 阅读文档
+      to: '/quick-start'
       trailingIcon: i-lucide-arrow-right
-    - label: View on GitHub
-      to: 'https://github.com/nuxt-ui-templates/docs'
+    - label: 官方 GitHub
+      to: 'https://github.com/mikro-orm/mikro-orm'
       target: _blank
       variant: subtle
       icon: i-simple-icons-github
-  title: Ready to build an amazing documentation?
-  description: Join thousands of developers building with Nuxt and Nuxt UI. Get this template and start shipping today.
+  title: 准备好构建可扩展的应用了吗？
+  description: 无论你是使用 SQL 还是 NoSQL，MikroORM 都能为你提供一致且强大的开发体验。
   class: dark:bg-neutral-950
   ---
-
+  
   :stars-bg
   :::
 ::
