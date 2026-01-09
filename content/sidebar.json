@@ -126,12 +126,12 @@
         {
           "type": "link",
           "label": "EntityManager API",
-          "href": "/api/core/class/EntityManager"
+          "href": ""
         },
         {
           "type": "link",
           "label": "EntityRepository API",
-          "href": "/api/core/class/EntityRepository"
+          "href": "https://mikro-orm.io/api/next/core/class/EntityRepository"
         },
         {
           "type": "link",
